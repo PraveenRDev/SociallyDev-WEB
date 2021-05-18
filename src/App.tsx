@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import CssBaseline from '@material-ui/core/CssBaseline'
+import ThemeProvider from '@material-ui/styles/ThemeProvider'
+import { Provider } from 'react-redux'
+import Signin from './pages/signin'
+import SignUp from './pages/singup'
+import { store } from './store'
+import theme from './utils/Theme'
+import AlertMessage from './components/Alert'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<Provider store={store}>
+				<AlertMessage />
+				<Router>
+					<Switch>
+						<Route path='/login'>
+							<Signin />
+						</Route>
+						<Route path='/register'>
+							<SignUp />
+						</Route>
+					</Switch>
+				</Router>
+			</Provider>
+		</ThemeProvider>
+	)
 }
 
-export default App;
+export default App
